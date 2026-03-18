@@ -58,10 +58,6 @@ if __name__ == "__main__":
                 message_placeholder = st.empty()
                 full_response = ""
 
-            with st.chat_message("assistant"):
-                message_placeholder = st.empty()
-                full_response = ""
-
                 with st.spinner('CHAT-BOT is at Work ...'):
                     assistant_response = output = chain.run(input=user_input)
                 # Simulate stream of response with milliseconds delay

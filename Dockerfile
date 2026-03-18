@@ -1,5 +1,8 @@
 # The builder image, used to build the virtual environment
-FROM python:3.11-buster as builder
+# Build and run on macOS arm64:
+#   docker build --platform linux/amd64 -t langchain-streamlit .
+#   docker run --platform linux/amd64 -p 8080:8080 langchain-streamlit
+FROM python:3.11-slim-bookworm as builder
 
 RUN apt-get update && apt-get install -y git
 
@@ -23,7 +26,7 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry install --without dev --no-root && rm -rf $POETRY_CACHE_DIR
 
 # The runtime image, used to just run the code provided its virtual environment
-FROM python:3.11-slim-buster as runtime
+FROM python:3.11-slim-bookworm as runtime
 
 ENV VIRTUAL_ENV=/app/.venv \
     PATH="/app/.venv/bin:$PATH"
