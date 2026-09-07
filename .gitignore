@@ -154,3 +154,10 @@ cython_debug/
 credentials.json
 token.json
 
+
+# Dependencies
+node_modules/
+
+# Editor swap files
+*.swp
+*.swo
